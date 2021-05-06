@@ -83,4 +83,4 @@ const HeaderSearch = (props) => {
   );
 };
 
-export default HeaderSearch;
+export default ()=>null;

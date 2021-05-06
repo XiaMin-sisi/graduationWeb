@@ -5,7 +5,6 @@ import styles from './index.less';
 import {UserAddOutlined,LockOutlined} from '@ant-design/icons'
 import {connect} from 'dva';
 import {history } from 'umi';
-import md5 from 'md5-js/md5';
 
 const checkNum=(form)=>{
   const num=form.getFieldValue("username");
@@ -32,11 +31,10 @@ const checkPwd=(form)=>{
 const Login = (props) => {
   const {dispatch}=props
   const [form]=Form.useForm();
-  console.log(md5("123456"));  // e10adc3949ba59abbe56e057f20f883e
   const login=(val)=>{
     dispatch({type:"user/LoginToSys",payload:{...val},callback:(res)=>{
       if(res.code===0){
-          message.success("🎉 🎉 🎉登录成功！欢迎来到 医疗资源调度中心");
+          message.success("🎉 🎉 🎉登录成功！欢迎来到 职位分析中心");
           history.push("/");
       }
       else{

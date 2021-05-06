@@ -25,35 +25,19 @@ class AvatarDropdown extends React.Component {
   };
 
   render() {
-    const { menu} = this.props;
-    const  currentUser=JSON.parse(localStorage.getItem("currentUser"));// 从缓存中获取用户的用户名、头像地址
+    const  currentUser=JSON.parse(localStorage.getItem("userName"));// 从缓存中获取用户的用户名、头像地址
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
-        {menu && (
-          <Menu.Item key="center">
-            <UserOutlined />
-            个人中心
-          </Menu.Item>
-        )}
-        {menu && (
-          <Menu.Item key="settings">
-            <SettingOutlined />
-            个人设置
-          </Menu.Item>
-        )}
-        {menu && <Menu.Divider />}
-
         <Menu.Item key="logout">
           <LogoutOutlined />
           退出登录
         </Menu.Item>
       </Menu>
     );
-    return currentUser && currentUser.name ? (
+    return currentUser? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
-          <Avatar size="small" className={styles.avatar} src={currentUser.avatar} alt="avatar" />
-          <span className={`${styles.name} anticon`}>{currentUser.name}</span>
+          <span className={`${styles.name} anticon`}>{currentUser}</span>
         </span>
       </HeaderDropdown>
     ) : (

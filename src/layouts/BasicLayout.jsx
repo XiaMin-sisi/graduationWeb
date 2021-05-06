@@ -11,7 +11,7 @@ import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
-import logo from '../assets/logo.svg';
+import logo from '../assets/logo.png';
 const noMatch = (
   <Result
     status={403}
@@ -67,29 +67,6 @@ const BasicLayout = (props) => {
     },
   } = props;
   const menuDataRef = useRef([]);
-  useEffect(() => {
-    if(localStorage.getItem("userName")&&localStorage.getItem("passWord"))
-    {
-      if (dispatch) {
-        dispatch({
-          type: 'user/isUser',
-          payload:{userName:localStorage.getItem("userName"),passWord:localStorage.getItem("passWord")},
-          callback:(res)=>{
-            if(res.code !== 0){
-              history.push("/user/login");
-            }
-          }
-        });
-      }
-    }
-    else {
-      history.push("/user/login")
-    }
-  }, []);
-  /**
-   * init variables
-   */
-
   const handleMenuCollapse = (payload) => {
     if (dispatch) {
       dispatch({
@@ -156,15 +133,7 @@ const BasicLayout = (props) => {
           {children}
         </Authorized>
       </ProLayout>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={(config) =>
-          dispatch({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+
     </>
   );
 };
