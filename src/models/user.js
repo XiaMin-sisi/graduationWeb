@@ -1,46 +1,32 @@
-import { queryCurrent, query as queryUsers } from '@/services/user';
+import { ToLogin } from '@/services/login';
+import md5 from 'md5-js/md5';
 const UserModel = {
   namespace: 'user',
   state: {
-    currentUser: {},
+    currentUser:{}
   },
   effects: {
-    *fetch(_, { call, put }) {
-      const response = yield call(queryUsers);
-      yield put({
-        type: 'save',
-        payload: response,
-      });
+    // 用户登录
+    *LoginToSys({ payload ,callback},{call,put}){
+        payload.passWord=md5(payload.passWord);
+        let res=yield call(ToLogin,{...payload})
+        if(res.code===0){
+          localStorage.setItem("userName",payload.userName);
+          localStorage.setItem("passWord",payload.passWord);
+          localStorage.setItem("accountRole",res.data.accountRole);
+          localStorage.setItem("currentUser",JSON.stringify({"name":res.data.userName,"avatar":""}));
+        }
+          callback(res);
     },
-
-    *fetchCurrent(_, { call, put }) {
-      const response = yield call(queryCurrent);
-      yield put({
-        type: 'saveCurrentUser',
-        payload: response,
-      });
-    },
+    *isUser({ payload ,callback},{call,put}){
+      let res=yield call(ToLogin,{...payload})
+      callback(res);
+    }
   },
   reducers: {
-    saveCurrentUser(state, action) {
-      return { ...state, currentUser: action.payload || {} };
-    },
-
-    changeNotifyCount(
-      state = {
-        currentUser: {},
-      },
-      action,
-    ) {
-      return {
-        ...state,
-        currentUser: {
-          ...state.currentUser,
-          notifyCount: action.payload.totalCount,
-          unreadCount: action.payload.unreadCount,
-        },
-      };
-    },
+    updateToView(state,payload){
+      return {...state,...payload}
+    }
   },
 };
 export default UserModel;

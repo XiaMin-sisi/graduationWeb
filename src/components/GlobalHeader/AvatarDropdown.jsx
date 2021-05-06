@@ -25,13 +25,8 @@ class AvatarDropdown extends React.Component {
   };
 
   render() {
-    const {
-      currentUser = {
-        avatar: '',
-        name: '',
-      },
-      menu,
-    } = this.props;
+    const { menu} = this.props;
+    const  currentUser=JSON.parse(localStorage.getItem("currentUser"));// 从缓存中获取用户的用户名、头像地址
     const menuHeaderDropdown = (
       <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
         {menu && (

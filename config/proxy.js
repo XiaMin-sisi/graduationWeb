@@ -20,7 +20,28 @@ export default {
       pathRewrite: {
         '^': '',
       },
-    }
+    },
+    '/upload/': {
+      target: "http://localhost:3001",
+      changeOrigin: true,
+      pathRewrite: {
+        '^': '',
+      },
+    },
+    '/g2/': {
+      target: "https://view.inews.qq.com",
+      changeOrigin: true,
+      pathRewrite: {
+        '^': '',
+      },
+    },
+    '/fy/': {
+      target: "https://www.maomin.club",
+      changeOrigin: true,
+      pathRewrite: {
+        '^': '',
+      },
+    },
   },
   test: {
     '/api/': {

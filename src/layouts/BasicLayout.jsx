@@ -39,24 +39,18 @@ const menuDataRender = (menuList) =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} 蚂蚁集团体验技术部出品`}
+    copyright={`${new Date().getFullYear()} 东华理工大学长江学院`}
     links={[
       {
-        key: 'Ant Design Pro',
-        title: 'Ant Design Pro',
-        href: 'https://pro.ant.design',
+        key: '作者主页',
+        title: '作者主页',
+        href: 'http://sisixxn.xyz',
         blankTarget: true,
       },
       {
-        key: 'github',
+        key: '项目源码',
         title: <GithubOutlined />,
-        href: 'https://github.com/ant-design/ant-design-pro',
-        blankTarget: true,
-      },
-      {
-        key: 'Ant Design',
-        title: 'Ant Design',
-        href: 'https://ant.design',
+        href: 'https://github.com/XiaMin-sisi',
         blankTarget: true,
       },
     ]}
@@ -74,10 +68,22 @@ const BasicLayout = (props) => {
   } = props;
   const menuDataRef = useRef([]);
   useEffect(() => {
-    if (dispatch) {
-      dispatch({
-        type: 'user/fetchCurrent',
-      });
+    if(localStorage.getItem("userName")&&localStorage.getItem("passWord"))
+    {
+      if (dispatch) {
+        dispatch({
+          type: 'user/isUser',
+          payload:{userName:localStorage.getItem("userName"),passWord:localStorage.getItem("passWord")},
+          callback:(res)=>{
+            if(res.code !== 0){
+              history.push("/user/login");
+            }
+          }
+        });
+      }
+    }
+    else {
+      history.push("/user/login")
     }
   }, []);
   /**

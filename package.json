@@ -67,8 +67,9 @@
     "lodash-decorators": "^6.0.0",
     "lodash.debounce": "^4.0.8",
     "lodash.isequal": "^4.5.0",
+    "md5-js": "0.0.3",
     "mockjs": "^1.0.1-beta3",
-    "moment": "^2.25.3",
+    "moment": "^2.29.1",
     "numeral": "^2.0.6",
     "nzh": "^1.0.3",
     "omit.js": "^2.0.2",
@@ -80,7 +81,7 @@
     "react-fittext": "^1.0.0",
     "react-helmet-async": "^1.0.4",
     "react-router": "^4.3.1",
-    "umi": "^3.2.14",
+    "umi": "^3.4.11",
     "umi-request": "^1.0.8"
   },
   "devDependencies": {

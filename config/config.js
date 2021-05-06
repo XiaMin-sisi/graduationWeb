@@ -69,17 +69,20 @@ export default defineConfig({
           routes: [
             {
               path: '/',
-              redirect: '/showEpidemic/domesticOutbreak',
+              redirect: '/home',
             },
+            {
+              path: '/home',
+              name: '首页',
+              icon: 'dashboard',
+              component: './home',
+            },
+
             {
               path: '/showEpidemic',
               name: '疫情展示',
               icon: 'dashboard',
               routes: [
-                {
-                  path: '/',
-                  redirect: '/showEpidemic/domesticOutbreak',
-                },
                 {
                   name: '国内疫情',
                   icon: 'smile',
@@ -100,10 +103,6 @@ export default defineConfig({
               path: '/account',
               routes: [
                 {
-                  path: '/',
-                  redirect: '/account/center',
-                },
-                {
                   name: '个人信息',
                   icon: 'smile',
                   path: '/account/center',
@@ -122,10 +121,6 @@ export default defineConfig({
               name: '物资中心',
               icon: 'dashboard',
               routes: [
-                {
-                  path: '/',
-                  redirect: '/resourceCenter/allInventory',
-                },
                 {
                   name: '物资库存',
                   icon: 'smile',
@@ -158,10 +153,6 @@ export default defineConfig({
               name: '自愿者中心',
               routes: [
                 {
-                  path: '/',
-                  redirect: '/volunteer/allMess',
-                },
-                {
                   name: '全部志愿者',
                   icon: 'smile',
                   path: '/volunteer/allMess',
@@ -193,10 +184,6 @@ export default defineConfig({
               icon: 'profile',
               routes: [
                 {
-                  path: '/',
-                  redirect: '/patient/patientMess',
-                },
-                {
                   name: '患者记录',
                   icon: 'smile',
                   path: '/patient/patientMess',
@@ -221,10 +208,6 @@ export default defineConfig({
               icon: 'CheckCircleOutlined',
               path: '/hospital',
               routes: [
-                {
-                  path: '/',
-                  redirect: '/hospital/allMess',
-                },
                 {
                   name: '全部医院',
                   icon: 'smile',
@@ -267,10 +250,6 @@ export default defineConfig({
               icon: 'highlight',
               path: '/leaveMess',
               routes: [
-                {
-                  path: '/',
-                  redirect: '/leaveMess/',
-                },
                 {
                   name: '留言寄托',
                   icon: 'smile',

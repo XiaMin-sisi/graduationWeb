@@ -54,3 +54,29 @@ const request = extend({
   credentials: 'include', // 默认请求是否带上cookie
 });
 export default request;
+
+export  const requestRedict=(url,method='GET',data,headers)=>{
+  let opt={
+    params:data,
+    method: method,
+    headers:headers?headers:{},
+  }
+  if(method.toLowerCase()==="post"){
+
+    if(headers['Content-Type']==="mulitipart/form-data") {
+      const newData = new FormData();
+      Object.keys(data).map(item => {
+        newData.append(item, data[item]);
+      });
+
+      opt.data=newData;
+    }
+    else{
+      opt.data=data;
+    }
+
+  }
+
+
+  return request(url,opt)
+}
