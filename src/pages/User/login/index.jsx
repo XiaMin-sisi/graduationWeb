@@ -34,7 +34,7 @@ const Login = (props) => {
   const login=(val)=>{
     dispatch({type:"user/LoginToSys",payload:{...val},callback:(res)=>{
       if(res.code===0){
-          message.success("🎉 🎉 🎉登录成功！欢迎来到 职位分析中心");
+          message.success("🎉 🎉 🎉登录成功！欢迎来到 职位数据分析平台");
           history.push("/");
       }
       else{

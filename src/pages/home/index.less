@@ -3,13 +3,13 @@
   text-align: center;
   font-weight: 530;
   font-size: 20px;
-  color: white;
+  color: #187f86;
   span{
     display: inline-block;
     padding: 0 35px;
     height: 40px;
     line-height: 40px;
-    background-color: #1890ff;
+    background-color: #60dbe8;
     cursor: pointer;
     border-radius: 20px;
   }
@@ -23,15 +23,15 @@
     width:209px;
     height:125px;
     line-height: 125px;
-    background-color:#1890ff;
+    background-color:#60dbe8;
     border-radius: 7px;
-    color: white;
+    color: #187f86;
     text-align: center;
     font-weight: bold;
     font-size: 20px;
     margin-right: 32px;
     &:hover{
-      box-shadow: 0 0 3px 3px #0384fc;
+      box-shadow: 0 0 3px 3px #07c4d9;
       cursor: pointer;
     }
   }
@@ -45,32 +45,19 @@
     width: 450px;
     height:675px ;
     margin-right: 32px;
-    background-image: url("../../assets/bg/b11.jpg");
+    background-image: url("../../assets/bg/h1.jpg");
     background-size: 100% 100%;
     border-radius: 7px;
     //box-shadow: 0 0 3px 3px #00070c;
 
  }
   .rightBox{
-    width: calc(100% - 482px);
-    max-width: 691px;
+    width: 450px;
     height:675px ;
-    padding: 8px;
-    line-height: 30px;
-    background-color: #1890ff;
+    margin-right: 32px;
+    background-image: url("../../assets/bg/h2.jpg");
+    background-size: 100% 100%;
     border-radius: 7px;
-    :global{
-      .ant-typography{
-        color: rgba(227,217,217,0.8);
-      }
-    }
-    .title{
-      height: 30px;
-      text-align: center;
-      color: rgba(227,217,217,0.8);
-      font-weight: bold;
-      line-height: 30px;
-    }
     //box-shadow: 0 0 5px 3px #0287fc;
   }
 
@@ -78,9 +65,31 @@
 }
 
 .bottom{
-  margin-top: 50px;
-  text-align: center;
-  font-weight: 530;
-  font-size: 20px;
-  color: black;
+  padding:16px 32px;
+  color: #187f86;
+  font-size: 19px;
+  font-weight: 520;
+  width: 1200px;
+  margin-top: 32px;
+  background-color: #60dbe8;
+  border-radius: 7px;
+  .desTitle{
+    text-align: left;
+    font-size: 24px;
+    font-weight: 530;
+    margin-bottom: 16px;
+  }
+  .desText{
+    padding-right: 16px;
+    span{
+      color: #1890ff;
+      font-style: italic;
+      font-size: 21px;
+    }
+  }
+  .desFoot{
+    margin: 16px 0;
+    text-align: center;
+  }
+
 }

@@ -11,6 +11,7 @@ import { Result, Button } from 'antd';
 import Authorized from '@/utils/Authorized';
 import RightContent from '@/components/GlobalHeader/RightContent';
 import { getMatchMenu } from '@umijs/route-utils';
+import styles from  './BasicLayout.less'
 import logo from '../assets/logo.png';
 const noMatch = (
   <Result
@@ -39,18 +40,18 @@ const menuDataRender = (menuList) =>
 
 const defaultFooterDom = (
   <DefaultFooter
-    copyright={`${new Date().getFullYear()} 东华理工大学长江学院`}
+    c copyright={`${new Date().getFullYear()} 南昌大学科学技术学院`}
     links={[
       {
         key: '作者主页',
         title: '作者主页',
-        href: 'http://sisixxn.xyz',
+        href: 'http://www.ndkj.com.cn/',
         blankTarget: true,
       },
       {
         key: '项目源码',
         title: <GithubOutlined />,
-        href: 'https://github.com/XiaMin-sisi',
+        href: 'https://github.com',
         blankTarget: true,
       },
     ]}
@@ -87,6 +88,7 @@ const BasicLayout = (props) => {
   return (
     <>
       <ProLayout
+        className={styles.bigBox}
         logo={logo}
         formatMessage={formatMessage}
         {...props}
