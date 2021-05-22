@@ -1,3 +1,9 @@
+/*
+ * @Author: XiaMin
+ * @Date: 2021-03-04 19:22:24
+ * @Description: file content
+ */
+import {message} from 'antd'
 import { uploadImg } from '@/services/uploadImg';
 
 const UserModel = {
@@ -6,8 +12,13 @@ const UserModel = {
 
   },
   effects: {
-    *uploadImg({payload,callback},{call}) {
-      const res=yield call(uploadImg,payload,{'Content-Type': 'mulitipart/form-data' });
+    *uploadAvatar({payload,callback},{call}) {
+      const res=yield call(uploadImg,{...payload,type:"avatar"},{'Content-Type': 'mulitipart/form-data' });
+      if(res&&res.code==0)
+        {
+          callback(res);
+          message.success("头像上传成功");
+        }
     }
   },
   reducers: {

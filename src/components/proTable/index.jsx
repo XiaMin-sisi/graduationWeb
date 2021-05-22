@@ -1,47 +1,49 @@
 import React, { useEffect, useState } from 'react';
 import style from './index.less';
 import {Table,Row,Col,Form,Input,Select,DatePicker,Button} from 'antd'
+import moment from 'moment'
 
 const Item=Form.Item;
 const { RangePicker } = DatePicker;
 const ProTable=(props)=>{
   //属性示例
- /* const [form]=Form.useForm();
-  const fieldItems=[
-    {type:"input",label:"姓名",placeholder:"请输入。。",name:"userName"},
-    {type:"select",label:"姓名",placeholder:"请输入。。",value:[{label:"张三",value:1},{label:"李四",value:2}],name:"asp"},
-    {type:"date",label:"姓名",name:"java"},
-    {type:"dateRange",label:"姓名",name:"php"}
-    ];
-  const topButton=(row)=>{
-    return [
-      <Button type={'primary'} onClick={()=>{console.log(row.userName)}} key={1}>姓名</Button>,
-      <Button type={'primary'} onClick={()=>{console.log(row.chemicalsId)}} key={2}>年纪</Button>
-    ]
-  };
-  const columns=[
-    {
-      title: '操作时间',
-      dataIndex: 'time',
-      key: 'time',
-      render: text => {
-        return <span>{moment(text).format('YYYY-MM-DD HH:mm:ss')}</span>;
-      },
-    },
-    {
-      title: '操作人',
-      dataIndex: 'userName',
-      key: 'userName'
-    }
-  ];
-  const dataSource=[
-    {time:1618898336053,userName:"夏敏",status:"2",chemicalsName:"苹果",chemicalsId:"001"},
-    {time:1618898336053,userName:"夏敏",status:"2",chemicalsName:"苹果",chemicalsId:"002"}
-  ]
-  const rowKey="chemicalsId";
-  const selectType="radio";
-  const totalCount=300;
-  const onFinish=(params)=>{console.log(params)};*/
+  // const [form]=Form.useForm();
+  // const fieldItems=[
+  //   {type:"input",label:"姓名",placeholder:"请输入。。",name:"userName"},
+  //   {type:"select",label:"姓名",placeholder:"请输入。。",value:[{label:"张三",value:1},{label:"李四",value:2}],name:"asp"},
+  //   {type:"date",label:"姓名",name:"java"},
+  //   {type:"dateRange",label:"姓名",name:"php"}
+  //   ];
+  // const topButton=(row)=>{
+  //   return [
+  //     <Button type={'primary'} onClick={()=>{console.log(row.userName)}} key={1}>姓名</Button>,
+  //     <Button type={'primary'} onClick={()=>{console.log(row.chemicalsId)}} key={2}>年纪</Button>
+  //   ]
+  // };
+  // const columns=[
+  //   {
+  //     title: '操作时间',
+  //     dataIndex: 'time',
+  //     key: 'time',
+  //     render:(text,row)=>{
+  //       return text?moment(text).format("YYYY-MM-DD HH:mm"):"--"
+  //     }
+  //   },
+  //   {
+  //     title: '操作人',
+  //     dataIndex: 'userName',
+  //     key: 'userName'
+  //   }
+  // ];
+  // const dataSource=[
+  //   {time:1618898336053,userName:"夏敏",status:"2",chemicalsName:"苹果",chemicalsId:"001"},
+  //   {time:1618898336053,userName:"夏敏",status:"2",chemicalsName:"苹果",chemicalsId:"002"}
+  // ]
+  // const rowKey="chemicalsId";
+  // const selectType="radio";
+  // const totalCount=300;
+  // const onFinish=(params)=>{console.log(params)};
+  // const isPagination=true
 
   let {
     form,//表单实例对象
@@ -58,7 +60,6 @@ const ProTable=(props)=>{
 
   //如果表格可以选择，用来保存所选择的行数据
   const [rowList,setRowList]=useState([]);
-
   //保存当前的pageSize、pageNum 不要用state保存，会有警告就很奇怪
   let pageSize=10;
   let pageNum=1;
@@ -114,8 +115,9 @@ const ProTable=(props)=>{
   const createButton=()=>{
     if(selectType=="radio")
       return topButton(rowList[0]||{});
-    else
+    else if(selectType=="checkbox")
       return topButton(rowList);
+    else
     return  topButton({})
   }
 
@@ -125,6 +127,7 @@ const ProTable=(props)=>{
         onFinish({pageSize,pageNum,...form.getFieldsValue()});
       else
         onFinish({pageSize,pageNum});
+      setRowList([])
   }
 
   //选中 / 取消 表格某一项的回调
@@ -197,7 +200,7 @@ const ProTable=(props)=>{
     <>
       {/*----筛选条件----*/}
       {fieldItems.length>0?
-        <Form className={style.formBox} labelCol={{span:5}} wrapperCol={{span:19}} form={form}>
+        <Form className={style.formBox} labelCol={{span:5}} wrapperCol={{span:19}} form={form} onFinish={search}>
           <Row gutter={gutterSize} className={style.formRow}>
             {createForm()}
           </Row>
@@ -217,7 +220,7 @@ const ProTable=(props)=>{
 
         {/*额外操作*/}
 
-        {topButton().length?
+        {topButton(rowList).length?
           <div className={style.topButton}>
             {createButton()}
           </div>

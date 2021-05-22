@@ -1,3 +1,8 @@
+/*
+ * @Author: XiaMin
+ * @Date: 2021-02-24 22:53:10
+ * @Description: file content
+ */
 /**
  * request 网络请求工具
  * 更详细的 api 文档: https://github.com/umijs/umi-request
@@ -61,7 +66,7 @@ export  const requestRedict=(url,method='GET',data,headers)=>{
     method: method,
     headers:headers?headers:{},
   }
-  if(method.toLowerCase()==="post"){
+  if(method.toLowerCase()==="post"||method.toLowerCase()=="put"){
 
     if(headers['Content-Type']==="mulitipart/form-data") {
       const newData = new FormData();

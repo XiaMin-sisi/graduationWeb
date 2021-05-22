@@ -101,20 +101,7 @@ export default defineConfig({
               name: '个人中心',
               icon: 'user',
               path: '/account',
-              routes: [
-                {
-                  name: '个人信息',
-                  icon: 'smile',
-                  path: '/account/center',
-                  component: './account/center',
-                },
-                {
-                  name: '信息设置',
-                  icon: 'smile',
-                  path: '/account/settings',
-                  component: './account/settings',
-                },
-              ],
+              component:'./account'
             },
             {
               path: '/resourceCenter',

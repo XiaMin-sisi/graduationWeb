@@ -1,0 +1,71 @@
+.bigBox{
+    width: 100%;
+    height: calc(100vh - 50px);
+    background-image:url('../../assets/imgs/bg.jpg') ;
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+    display: flex;
+    align-items: center;
+}
+.chart {
+    width: 100%;
+    height: 500px;
+}
+.map1,
+.map2,
+.map3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 450px;
+    height: 450px;
+    background: url(../../assets/imgs/globe.png) no-repeat;
+    background-size: 100% 100%;
+    opacity: 0.3;
+}
+
+.map2 {
+    width: 500px;
+    height: 500px;
+    background-image: url(../../assets/imgs/globe-bg2.png);
+    opacity: 0.6;
+    animation: rotate 15s linear infinite;
+}
+
+.map3 {
+    width: 450px;
+    height: 450px;
+    background-image: url(../../assets/imgs/globe-bg.png);
+    animation: rotate1 10s linear infinite;
+}
+
+@keyframes rotate {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(360deg);
+    }
+}
+
+@keyframes rotate1 {
+    from {
+        transform: translate(-50%, -50%) rotate(0deg);
+    }
+
+    to {
+        transform: translate(-50%, -50%) rotate(-360deg);
+    }
+}
+
+.outchart{
+    width: 100%;
+    height: calc(100vh - 182px);
+}
+.page{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 32px;
+}
