@@ -28,5 +28,5 @@ const Page=(props)=>{
     </PageHeaderWrapper>
   )
 }
-export default connect(({accountCenter})=>{return { accountCenter }})(Page);
+export default connect(({recourseCenter})=>{return { recourseCenter }})(Page);
 
