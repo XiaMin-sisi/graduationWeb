@@ -145,24 +145,24 @@ export default defineConfig({
                   path: '/volunteer/allMess',
                   component: './volunteer/allMess',
                 },
-                {
-                  name: '分配志愿者',
-                  icon: 'smile',
-                  path: '/volunteer/distribution',
-                  component: './volunteer/distribution',
-                },
-                {
-                  name: '志愿者报名',
-                  icon: 'smile',
-                  path: '/volunteer/signUp',
-                  component: './volunteer/signUp',
-                },
-                {
-                  name: '查看志愿者',
-                  icon: 'smile',
-                  path: '/volunteer/check',
-                  component: './volunteer/check',
-                },
+                // {
+                //   name: '分配志愿者',
+                //   icon: 'smile',
+                //   path: '/volunteer/distribution',
+                //   component: './volunteer/distribution',
+                // },
+                // {
+                //   name: '志愿者报名',
+                //   icon: 'smile',
+                //   path: '/volunteer/signUp',
+                //   component: './volunteer/signUp',
+                // },
+                // {
+                //   name: '查看志愿者',
+                //   icon: 'smile',
+                //   path: '/volunteer/check',
+                //   component: './volunteer/check',
+                // },
               ],
             },
             {
@@ -176,18 +176,18 @@ export default defineConfig({
                   path: '/patient/patientMess',
                   component: './patient/patientMess',
                 },
-                {
-                  name: '患者入院',
-                  icon: 'smile',
-                  path: '/patient/toHospital',
-                  component: './patient/toHospital',
-                },
-                {
-                  name: '患者出院',
-                  icon: 'smile',
-                  path: '/patient/outHospital',
-                  component: './patient/outHospital',
-                },
+                // {
+                //   name: '患者入院',
+                //   icon: 'smile',
+                //   path: '/patient/toHospital',
+                //   component: './patient/toHospital',
+                // },
+                // {
+                //   name: '患者出院',
+                //   icon: 'smile',
+                //   path: '/patient/outHospital',
+                //   component: './patient/outHospital',
+                // },
               ],
             },
             {

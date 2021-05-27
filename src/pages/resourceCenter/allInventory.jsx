@@ -110,12 +110,12 @@ const Page=(props)=>{
        <Modal title={`${tetx}物资`} visible={addVisible} onCancel={()=>{setAddvisible(false)}}
               cancelText="取消" okText="确认" onOk={addResource}
        >
-          <Form form={form2}>
+          <Form form={form2} labelCol={{span:8}} wrapperCol={{span:10}}>
             <Form.Item label="物资名称" name="name" rules={[{required:true,message:"必填"}]}>
                 <Input placeholder="请输入"></Input>
             </Form.Item>
-            <Form.Item label="中心库存数" name="num" rules={[{required:true,message:"必填"}]} >
-                <InputNumber placeholder="请输入" min={0}></InputNumber>
+            <Form.Item label="中心库存数" name="num" rules={[{required:true,message:"必填"}]} style={{width:"100%"}}>
+                <InputNumber placeholder="请输入" min={0} style={{width:"100%"}}></InputNumber>
             </Form.Item>
           </Form>
        </Modal>

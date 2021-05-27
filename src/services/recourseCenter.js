@@ -54,3 +54,10 @@ export async function getHospitalResource(data,headers) {
       data,
       headers?headers:{})
   }
+  export async function getApplyList(data,headers) {
+    return requestRedict(
+      '/local/resource/getApplyList',
+      'get',
+      data,
+      headers?headers:{})
+  }

@@ -7,7 +7,7 @@ import {message} from 'antd'
 import {history} from 'umi'
 import { 
     addResource,getResourceList,deleteResource,getResourceIdList,addResourceToHS,
-    getHospitalResource,applyResource
+    getHospitalResource,applyResource,getApplyList
 } from '@/services/recourseCenter';
 const Model = {
   namespace: 'recourseCenter',
@@ -17,6 +17,8 @@ const Model = {
     resourceIdList:[],
     HsresourceList:[],
     HstotalCount:0,
+    applyList:[],
+    applyListCount:0,
   },
   effects: {
     *addResource({payload,callback},{call,put}) {
@@ -88,12 +90,22 @@ const Model = {
         const res=yield call(applyResource,payload);
         if(res&&res.code==0)
           {
-            message.success("申请成功，等待管理员审批！")
+            message.success("操作成功！")
           }
         else
-            message.error("申请失败"+res.message)
+            message.error("操作失败！"+res.message)
         if(callback) callback(res);
     },
+    *getApplyList({payload,callback},{call,put}) {
+      const res=yield call(getApplyList,payload);
+      if(res&&res.code==0)
+        {
+          yield put({type:"updateToView",payload:{applyList:res.data.data,applyListCount:res.data.totalCount}})
+        }
+      else
+          message.error("查询失败！"+res.message)
+      if(callback) callback(res);
+  },
   },
   reducers: {
     updateToView(state, { payload }) {
