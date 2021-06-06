@@ -8,9 +8,10 @@ import styles from './index.less';
 class AvatarDropdown extends React.Component {
   onMenuClick = (event) => {
     const { key } = event;
-
+    history.push(`/user/login`);
     if (key === 'logout') {
       const { dispatch } = this.props;
+      
 
       if (dispatch) {
         dispatch({
@@ -20,8 +21,12 @@ class AvatarDropdown extends React.Component {
 
       return;
     }
-
-    history.push(`/account/${key}`);
+    else{
+      if(key === 'center')
+        history.push(`/account?key=1`);
+      else
+        history.push(`/account?key=2`)
+    }
   };
 
   render() {

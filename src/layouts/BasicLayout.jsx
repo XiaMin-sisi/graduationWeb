@@ -3,8 +3,8 @@
  * You can view component api by:
  * https://github.com/ant-design/ant-design-pro-layout
  */
-import ProLayout, { DefaultFooter, SettingDrawer } from '@ant-design/pro-layout';
-import React, { useEffect, useMemo, useRef } from 'react';
+import ProLayout, { DefaultFooter } from '@ant-design/pro-layout';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import { Link, useIntl, connect, history } from 'umi';
 import { GithubOutlined } from '@ant-design/icons';
 import { Result, Button } from 'antd';
@@ -28,14 +28,7 @@ const noMatch = (
 /**
  * use Authorized check all menu item
  */
-const menuDataRender = (menuList) =>
-  menuList.map((item) => {
-    const localItem = {
-      ...item,
-      children: item.children ? menuDataRender(item.children) : undefined,
-    };
-    return Authorized.check(item.authority, localItem, null);
-  });
+
 
 const defaultFooterDom = (
   <DefaultFooter
@@ -67,6 +60,11 @@ const BasicLayout = (props) => {
     },
   } = props;
   const menuDataRef = useRef([]);
+  const [menuData2,setMenu]=useState(require('./adminMenu'));
+  const [role,setRole]=useState(localStorage.getItem("accountRole"))
+  useEffect(()=>{
+    setMenu(require('./adminMenu'));
+  },[])
   useEffect(() => {
     if(localStorage.getItem("userName")&&localStorage.getItem("passWord"))
     {
@@ -89,7 +87,30 @@ const BasicLayout = (props) => {
   /**
    * init variables
    */
-
+   const menuDataRender = (menuList) =>
+   menuList.map((item) => {
+       const localItem = {
+         ...item,
+         children: item.children ? menuDataRender(item.children) : undefined,
+       };
+       //医院应该去除的菜单
+       if(role=="1")
+       {
+         if(localItem.name=="中心库存"||localItem.name=="物资审批记录"||localItem.name=="医院中心")
+         return  null;
+       }
+       //管理员应该去除的菜单
+       if(role=="0"){
+         if(localItem.name=="自愿者中心"||localItem.name=="物资库存"||localItem.name=="物资申领记录")
+         return  null;
+       }
+       //自愿者应该去除的菜单
+       if(role=="2"){
+         if(localItem.name=="物资中心"||localItem.name=="患者中心"||localItem.name=="自愿者中心"||localItem.name=="医院中心")
+         return  null;
+       }
+       return Authorized.check(item.authority, localItem, null);
+     });
   const handleMenuCollapse = (payload) => {
     if (dispatch) {
       dispatch({
@@ -156,15 +177,7 @@ const BasicLayout = (props) => {
           {children}
         </Authorized>
       </ProLayout>
-      <SettingDrawer
-        settings={settings}
-        onSettingChange={(config) =>
-          dispatch({
-            type: 'settings/changeSetting',
-            payload: config,
-          })
-        }
-      />
+      
     </>
   );
 };

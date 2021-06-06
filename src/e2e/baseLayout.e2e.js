@@ -1,5 +1,10 @@
+/*
+ * @Author: XiaMin
+ * @Date: 2021-02-24 22:52:57
+ * @Description: file content
+ */
 const { uniq } = require('lodash');
-const RouterConfig = require('../../config/config').default.routes;
+const RouterConfig = require('../layouts/adminMenu');
 
 const BASE_URL = `http://localhost:${process.env.PORT || 8000}`;
 
