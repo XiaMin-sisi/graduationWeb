@@ -44,7 +44,8 @@ const Page=(props)=>{
         callback:(res)=>{
             if(res&&res.code==0){
                 setImgUrl(res.data);
-                localStorage.setItem("currentUser",JSON.stringify({...JSON.parse(localStorage.getItem("currentUser")),avatar:res.data}))
+                localStorage.setItem("currentUser",JSON.stringify({...JSON.parse(localStorage.getItem("currentUser")),avatar:res.data}));
+                dispatch({type:'upload/update',payload:{}})
             }  
         }
     });
@@ -59,6 +60,7 @@ const Page=(props)=>{
             callback:(res)=>{
             if(res&&res.code==0)
                 localStorage.setItem("currentUser",JSON.stringify({"name":values.name,"avatar":imgUrl}));
+                dispatch({type:'upload/update',payload:{}})
             }
         });
  }

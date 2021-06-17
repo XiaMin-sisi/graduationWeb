@@ -4,7 +4,11 @@
  * @Description: file content
  */
 import { ToLogin } from '@/services/login';
+import { 
+  regist
+} from '@/services/hospital';
 import md5 from 'md5-js/md5';
+import { message } from 'antd';
 const UserModel = {
   namespace: 'user',
   state: {
@@ -28,6 +32,17 @@ const UserModel = {
     *isUser({ payload ,callback},{call,put}){
       let res=yield call(ToLogin,{...payload})
       callback(res);
+    },
+    *regist({ payload ,callback},{call,put}){
+      let res=yield call(regist,{...payload})
+      if(res.code==0){
+        
+      }
+      else{
+        message.error("注册失败！"+res.message)
+      }
+      if(callback)
+        callback(res);
     }
   },
   reducers: {

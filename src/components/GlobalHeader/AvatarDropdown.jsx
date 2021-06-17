@@ -1,17 +1,18 @@
 import { LogoutOutlined, SettingOutlined, UserOutlined } from '@ant-design/icons';
 import { Avatar, Menu, Spin } from 'antd';
-import React from 'react';
+import React,{useState,useEffect} from 'react';
 import { history, connect } from 'umi';
 import HeaderDropdown from '../HeaderDropdown';
 import styles from './index.less';
 
-class AvatarDropdown extends React.Component {
-  onMenuClick = (event) => {
+const AvatarDropdown = (props)=>{
+    const onMenuClick = (event) => {
     const { key } = event;
-    history.push(`/user/login`);
+    //history.push(`/user/login`);
     if (key === 'logout') {
-      const { dispatch } = this.props;
-      
+      const { dispatch } = props;
+      localStorage.setItem("passWord","");
+      localStorage.setItem("userName","");
 
       if (dispatch) {
         dispatch({
@@ -27,13 +28,12 @@ class AvatarDropdown extends React.Component {
       else
         history.push(`/account?key=2`)
     }
-  };
-
-  render() {
-    const { menu} = this.props;
-    const  currentUser=JSON.parse(localStorage.getItem("currentUser"));// 从缓存中获取用户的用户名、头像地址
+    };
+    console.log(props)
+    const {menu,upload:{isUpdate}} = props;
+    const  [currentUser,setCurrent]=useState(JSON.parse(localStorage.getItem("currentUser")));// 从缓存中获取用户的用户名、头像地址
     const menuHeaderDropdown = (
-      <Menu className={styles.menu} selectedKeys={[]} onClick={this.onMenuClick}>
+      <Menu className={styles.menu} selectedKeys={[]} onClick={onMenuClick}>
         {menu && (
           <Menu.Item key="center">
             <UserOutlined />
@@ -54,6 +54,13 @@ class AvatarDropdown extends React.Component {
         </Menu.Item>
       </Menu>
     );
+    useEffect(()=>{
+      if(isUpdate){
+        setCurrent(JSON.parse(localStorage.getItem("currentUser")));
+      }
+    },[isUpdate])
+   
+
     return currentUser && currentUser.name ? (
       <HeaderDropdown overlay={menuHeaderDropdown}>
         <span className={`${styles.action} ${styles.account}`}>
@@ -72,9 +79,10 @@ class AvatarDropdown extends React.Component {
         />
       </span>
     );
-  }
+  
 }
 
-export default connect(({ user }) => ({
+export default connect(({ user,upload }) => ({
   currentUser: user.currentUser,
+  upload
 }))(AvatarDropdown);

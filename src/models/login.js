@@ -1,3 +1,8 @@
+/*
+ * @Author: XiaMin
+ * @Date: 2021-02-24 22:53:10
+ * @Description: file content
+ */
 import { stringify } from 'querystring';
 import { history } from 'umi';
 // import { fakeAccountLogin } from '@/services/login';
@@ -46,6 +51,7 @@ const Model = {
       const { redirect } = getPageQuery(); // Note: There may be security issues, please note
 
       if (window.location.pathname !== '/user/login' && !redirect) {
+       
         history.replace({
           pathname: '/user/login',
           search: stringify({

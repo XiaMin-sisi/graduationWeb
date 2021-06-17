@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './index.less';
 import {UserAddOutlined,LockOutlined} from '@ant-design/icons'
 import {connect} from 'dva';
-import {history } from 'umi';
+import {history,Link} from 'umi';
 import md5 from 'md5-js';
 
 
@@ -36,7 +36,7 @@ const Login = (props) => {
                          name="userName"
                          rules={[
                           {message:"账号不能为空！",required:true},
-                          {message: "不能以0开头！",pattern:/^[1-9][\w\W]*$/},
+                          {message: "不能以0开头！",pattern:/^[^0][\w\W]*$/},
                           {message:"手机号只能包含数字",pattern: /^[0-9]+$/},
                           {message: "手机号长度不正确",pattern:/^[0-9]{11}/}
                          ]}
@@ -55,6 +55,9 @@ const Login = (props) => {
                 </Button>
               </Form.Item>
             </Form>
+            <Link className={styles.register} to="/user/register">
+                    没有账号？去注册>>
+           </Link>
         </div>
   )
 };

@@ -106,7 +106,7 @@ const BasicLayout = (props) => {
        }
        //自愿者应该去除的菜单
        if(role=="2"){
-         if(localItem.name=="物资中心"||localItem.name=="患者中心"||localItem.name=="自愿者中心"||localItem.name=="医院中心")
+         if(localItem.name=="物资中心"||localItem.name=="患者中心"||localItem.name=="自愿者中心")
          return  null;
        }
        return Authorized.check(item.authority, localItem, null);
