@@ -91,7 +91,7 @@ const Page=(props)=>{
   }
 
   return(
-    <PageHeaderWrapper title={false}>
+    <PageHeaderWrapper title={false} className={styles.box}>
        医院、中心共同页面 -- 查看中心的物资库存
        <ProTable
             form={form} 

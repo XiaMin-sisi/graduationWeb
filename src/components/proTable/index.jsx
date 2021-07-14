@@ -3,10 +3,10 @@ import style from './index.less';
 import {Table,Row,Col,Form,Input,Select,DatePicker,Button} from 'antd'
 import moment from 'moment'
 
-const Item=Form.Item;
+const {Item} = Form;
 const { RangePicker } = DatePicker;
 const ProTable=(props)=>{
-  //属性示例
+  // 属性示例
   // const [form]=Form.useForm();
   // const fieldItems=[
   //   {type:"input",label:"姓名",placeholder:"请输入。。",name:"userName"},
@@ -45,32 +45,32 @@ const ProTable=(props)=>{
   // const onFinish=(params)=>{console.log(params)};
   // const isPagination=true
 
-  let {
-    form,//表单实例对象
-    dataSource=[],//数据源,接受一个数组
-    totalCount=0,//数据总条数，接受一个数字
-    onFinish=({})=>{},//获取数据源的方法，接受一个方法。参数为搜索条件和页码条件
-    columns=[],//表格的列表格式，接受一个数组
-    fieldItems=[],//筛选条件，表格上方的搜索条件，接受一个数组，目前支持4种表单元素。input select date dateRange
-    selectType="",//表格的可选类型 radio checkbox 默认不可选择
-    topButton=()=>[],//列表头部的操作按钮，接受一个方法，返回一个数组。参数为所选择的rowList
-    rowKey="",//表格的唯一标识，
-    isPagination=true,//是否需要页码
+  const {
+    form,// 表单实例对象
+    dataSource=[],// 数据源,接受一个数组
+    totalCount=0,// 数据总条数，接受一个数字
+    onFinish=({})=>{},// 获取数据源的方法，接受一个方法。参数为搜索条件和页码条件
+    columns=[],// 表格的列表格式，接受一个数组
+    fieldItems=[],// 筛选条件，表格上方的搜索条件，接受一个数组，目前支持4种表单元素。input select date dateRange
+    selectType="",// 表格的可选类型 radio checkbox 默认不可选择
+    topButton=()=>[],// 列表头部的操作按钮，接受一个方法，返回一个数组。参数为所选择的rowList
+    rowKey="",// 表格的唯一标识，
+    isPagination=true,// 是否需要页码
   }=props
 
-  //如果表格可以选择，用来保存所选择的行数据
+  // 如果表格可以选择，用来保存所选择的行数据
   const [rowList,setRowList]=useState([]);
-  //保存当前的pageSize、pageNum 不要用state保存，会有警告就很奇怪
+  // 保存当前的pageSize、pageNum 不要用state保存，会有警告就很奇怪
   let pageSize=10;
   let pageNum=1;
 
-  //页面一开始加载时调一次接口查询数据
+  // 页面一开始加载时调一次接口查询数据
   useEffect(()=>{
      search();
      return ()=>{};
   },[])
 
-  //生成表单
+  // 生成表单
   const createForm=()=>{
     if(fieldItems.length){
      return  fieldItems.map((item,index)=>{
@@ -106,22 +106,21 @@ const ProTable=(props)=>{
 
       })
     }
-    else {
+    
       return null;
-    }
+    
   }
 
-  //生成顶部操作按钮
+  // 生成顶部操作按钮
   const createButton=()=>{
     if(selectType=="radio")
       return topButton(rowList[0]||{});
-    else if(selectType=="checkbox")
+    if(selectType=="checkbox")
       return topButton(rowList);
-    else
     return  topButton({})
   }
 
-  //查询操作
+  // 查询操作
   const search=()=>{
       if(fieldItems.length>0)
         onFinish({pageSize,pageNum,...form.getFieldsValue()});
@@ -130,14 +129,14 @@ const ProTable=(props)=>{
       setRowList([])
   }
 
-  //选中 / 取消 表格某一项的回调
+  // 选中 / 取消 表格某一项的回调
     const onSelect=(row)=>{
     if(selectType=="radio"){
       setRowList([row]);
     }
     if(selectType=="checkbox")
     {
-      let arr=rowList.filter((val)=>{ return val[rowKey]!=row[rowKey]});
+      const arr=rowList.filter((val)=>{ return val[rowKey]!=row[rowKey]});
       if(arr.length==rowList.length){
         setRowList([...rowList,row]);
         console.log([...rowList,row]);
@@ -149,14 +148,14 @@ const ProTable=(props)=>{
     }
   }
 
-  //全选的回调
+  // 全选的回调
     const onSelectAll=(isAll,selectList)=>{
     if(isAll){
       console.log([...new Set([...selectList,...rowList])])
       setRowList([...new Set([...selectList,...rowList])])
     }
     else {
-      let arr=rowList.filter((val)=>{
+      const arr=rowList.filter((val)=>{
             !selectList.some((item)=>  item[rowKey]==val[rowKey])
       })
       console.log(arr)
@@ -164,26 +163,26 @@ const ProTable=(props)=>{
     }
   }
 
-  //行属性--点击、移入..
+  // 行属性--点击、移入..
     const onRow=(row)=>{
         return {
           onClick:()=>{onSelect(row)}
         }
     }
 
-  //配置
+  // 配置
     const gutterSize={ xs: 8, sm: 16, md: 24, lg: 32 }
     const formItemFormat = { xs: 24, sm: 24, md: 12, lg: 12, xl: 8, xxl: 6};
 
-    //表格选择配置
+    // 表格选择配置
     const rowSelection= {
       type:selectType,
-      onSelect:onSelect,
-      onSelectAll:onSelectAll,
+      onSelect,
+      onSelectAll,
       selectedRowKeys:rowList.map(item=>item[rowKey])
     }
 
-    //页码配置
+    // 页码配置
     const pagination={
       total:totalCount,
       showSizeChanger: true,
@@ -198,7 +197,7 @@ const ProTable=(props)=>{
 
   return(
     <>
-      {/*----筛选条件----*/}
+      {/* ----筛选条件----*/}
       {fieldItems.length>0?
         <Form className={style.formBox} labelCol={{span:5}} wrapperCol={{span:19}} form={form} onFinish={search}>
           <Row gutter={gutterSize} className={style.formRow}>
@@ -213,12 +212,12 @@ const ProTable=(props)=>{
         </Form>
         :null
       }
-      {/*----筛选条件----*/}
+      {/* ----筛选条件----*/}
 
 
       <Row style={{marginTop:16,backgroundColor:"white"}}>
 
-        {/*额外操作*/}
+        {/* 额外操作 */}
 
         {topButton(rowList).length?
           <div className={style.topButton}>
@@ -227,7 +226,7 @@ const ProTable=(props)=>{
           :null
         }
 
-        {/*表格*/}
+        {/* 表格 */}
         <Row style={{width:"100%"}}>
           <Table columns={columns}
                  dataSource={dataSource}

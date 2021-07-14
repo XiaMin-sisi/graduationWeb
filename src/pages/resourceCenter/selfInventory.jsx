@@ -102,8 +102,8 @@ const onFinish=(val)=>{
 
 
   return(
-    <PageHeaderWrapper title={false}>
-
+    <PageHeaderWrapper title={false} >
+       
        <ProTable
             form={form} 
             columns={columns}
@@ -117,9 +117,8 @@ const onFinish=(val)=>{
        >
 
        </ProTable>
-
        <Modal title={"新增库存种类"} visible={addVisible} onCancel={()=>{setAddvisible(false)}}
-              cancelText="取消" okText="新增" onOk={addResource}
+              cancelText="取消" okText="新增" onOk={addResource} centered={true} className={styles.box}
        >
           <Form form={form2} labelCol={{span:8}} wrapperCol={{span:12}}>
             <Form.Item label="选择需要添加的物资" name="suppliesId">
@@ -157,7 +156,7 @@ const onFinish=(val)=>{
        >
           确认删除库存种类--<span>{}</span>？,该物品剩余库存将会退还中心！
        </Modal>
-
+      
 
     </PageHeaderWrapper>
   )
