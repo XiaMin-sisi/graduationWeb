@@ -10,7 +10,7 @@ const {Item}=Form
 
 
 const Page=(props)=>{
-  let {dispatch,accountCenter:{userInfo}}=props;
+  const {dispatch,accountCenter:{userInfo}}=props;
   const [form]=Form.useForm();
   const [form2]=Form.useForm();
   const [key,saveKey]=useState();
@@ -31,7 +31,7 @@ const Page=(props)=>{
   const tabChange=(val)=>{
     saveKey(val);
   }
-  //上传头像
+  // 上传头像
   const beforeUpload=(file)=>{
     let tbName="hospitalmesstb";
     if(localStorage.getItem("accountRole")==0)
@@ -40,7 +40,7 @@ const Page=(props)=>{
         tbName="volunteerstb";
     dispatch({
         type:'upload/uploadAvatar',
-        payload:{file:file,role:tbName,userNum:localStorage.getItem("userName")},
+        payload:{file,role:tbName,userNum:localStorage.getItem("userName")},
         callback:(res)=>{
             if(res&&res.code==0){
                 setImgUrl(res.data);
@@ -51,7 +51,7 @@ const Page=(props)=>{
     });
     return false
 }
- //修改信息
+ // 修改信息
  const alterInfo=(values)=>{
     dispatch(
         {
@@ -64,7 +64,7 @@ const Page=(props)=>{
             }
         });
  }
- //修改密码
+ // 修改密码
  const alterPwd=(values)=>{
     form2.validateFields().then((values)=>{
         dispatch({type:"accountCenter/alterPwd",payload:{
@@ -181,7 +181,7 @@ const Page=(props)=>{
                 <Form.Item {...formItemProps} name='newPwd' label='新密码' hasFeedback
                   rules={[{ required: true, message: '请输入新密码!' }, () => ({
                     validator(rule, value) {
-                      let reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}/;
+                      const reg = /^(?![0-9]+$)(?![a-zA-Z]+$)[0-9A-Za-z]{6,}/;
                       if (!value || reg.test(value)) {
                         return Promise.resolve();
                       }

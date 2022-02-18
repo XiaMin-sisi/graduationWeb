@@ -73,7 +73,7 @@ export  const requestRedict=(url,method='GET',data,headers)=>{
       Object.keys(data).map(item => {
         newData.append(item, data[item]);
       });
-
+      console.log(newData)
       opt.data=newData;
     }
     else{
@@ -82,6 +82,6 @@ export  const requestRedict=(url,method='GET',data,headers)=>{
 
   }
 
-
+  console.log(opt)
   return request(url,opt)
 }
